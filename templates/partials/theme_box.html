@@ -1,0 +1,5 @@
+{% load theme %}
+<form method="get" action="{% url 'change_theme' %}">
+    {{t_form}}
+    <input type="submit" class="button {{user|theme}}" value="Change theme">
+</form>

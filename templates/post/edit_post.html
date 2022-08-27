@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1 class="title is-1">Edit Post</h1>
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+<div class="{{message.extra_tags}}">{{message}}</div>
+{% endfor %}
+{% endif %}
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{form.as_table}}
+  <div class="block"><input type="submit" value="Send" class="button is-medium is-light"></div>
+</form>
+{% endblock content %}

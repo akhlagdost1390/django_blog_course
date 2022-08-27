@@ -1,0 +1,15 @@
+{% load static %}
+<div class="ccard card">
+    <div class="cc-img"><img src="{% if post.banner %}{{post.banner.url}}{% else %}{% static 'no_image.PNG' %}{% endif %}" alt="{{post.title}}"></div>
+    <div class="card-content">
+        <h4 class="title is-4">
+            {{post.title}}
+        </h4>
+        <div class="field has-addons">
+            <a href="{% url 'post:edit' post.category.title post.slug %}" class="button is-light is-success is-small">Edit</a> 
+            <a href="{% url 'post:delete' post.category.title post.slug %}" class="button is-light is-danger is-small">Delete</a> 
+            <p class="button is-small is-light is-light">Like{{post.likes|pluralize}} {{post.likes}}</p>
+            <a href="{{post.get_absolute_url}}" class="button is-light is-warning is-small">see more</a>
+        </div>
+    </div>
+</div>

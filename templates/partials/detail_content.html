@@ -1,0 +1,36 @@
+{% load theme full_name %}
+{% if post.banner %}<dive class="image block"><img src="{{post.banner.url}}" alt="{{post.title}}"></dive>{% endif %}
+<h1 class="title is-1 block">{{post.title}}</h1>
+<div class="block"><small>{{post.created}}</small></div>
+<p class="block">{{post.body|safe}}</p>
+<div class="block">Tags : <small>{{post.tags}}</small></div>
+<hr>
+<div>
+    <div class="block ah">
+        <div class="author">
+            {% if post.user.profile.photo %}
+                <img src="{{post.user.profile.photo.url}}" class="author-img" alt="{{post.user|fullname}}">
+            {% else %}
+                <div style="font-size:35px; margin-right:30px"><span class="icon"><i class="fa-solid fa-user"></i></span> </div>
+            {% endif %}
+            <h4 class="title is-4"><a href="#">{{post.user|fullname}}</a></h4>
+        </div> 
+        <div class="block like">
+            <form class="like-btn" method="post" id="likeForm" data-url="{% url 'post:like' %}"  >
+                <input type="hidden" name="post_id" value="{{post.id}}"/>
+                {% csrf_token %}
+                <button type="submit" class="button"><span id="likeBtn"
+                    style='color:{% if action == 'like' %}black {% else %}red{% endif %}'
+                    ><i class="fa-solid fa-heart"></i></span></button>
+                <p id="likes">{{post.likes}}</p>
+            </form>
+            <div>
+                <button type="button" class="button"><span class="icon"><i class="fa-solid fa-share"></i></span></button>
+            </div>
+            <div>
+                <button type="button" class="button"><span class="icon"><i class="fa-solid fa-copy"></i></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+

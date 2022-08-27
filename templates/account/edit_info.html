@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1 class="title is-1">Edit My Info</h1>
+{% endblock header %}
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="{{message.extra_tags}}">{{message}}</div>
+        {% endfor %}
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in u_form %}
+            <div class="block">
+                <label class="label" for="{{field.auto_id}}">{{field.label}}</label>
+                <input type="{{field.widget_type}}" class="input" name="{{field.name}}" id="{{field.auto_id}}" value="{{field.value}}">
+                <small>{{field.errors}}</small>
+            </div>
+        {% endfor %}
+        {% for field in p_form %}
+            <div class="block">
+                <label class="label" for="{{field.auto_id}}">{{field.label}}</label>
+                {{field}}
+                <small>{{field.errors}}</small>
+            </div>  
+        {% endfor %} 
+        <div class="block"><input type="submit" value="Send" class="button is-medium is-light"></div>
+    </form>
+{% endblock content %}

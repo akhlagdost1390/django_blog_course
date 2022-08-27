@@ -1,0 +1,10 @@
+{% comment %} <form class="field" method="POST" id="commentForm" data-url="{% url 'post:leave_comment' %}">
+    {% csrf_token %}
+    <input type="hidden" name="post_id" value="{{post.id}}" id="post_id">
+    <div class="control block">
+        {{form}}
+    </div>
+    <div class="control block">
+        <button type="submit" class="button is-light" id="commentBtn">Send</button>
+    </div>
+</form> {% endcomment %}

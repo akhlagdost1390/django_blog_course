@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1 class="title is-1">{{category_name}}</h1>
+{% endblock header %}
+
+{% block content %}
+    {% for post in posts %}
+        {% include 'partials/my_post_card.html' %}
+    {% endfor %}
+{% endblock content %}

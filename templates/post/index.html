@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static theme full_name %}
+
+{% block content %}
+    <div class="columns">
+        <div class="column is-8 {{user|theme}}">
+            {% for post in posts %}
+            <div class="card card-display">
+                <div class="card-image image imagesize">
+                    {% if post.banner %}
+                        <img src="{{post.banner.url}}" alt="Image" style="height: 16rem;">
+                    {% else %}
+                        <img src="{% static 'no_image.PNG' %}" alt="Image" style="height: 16rem;">
+                    {% endif %}
+                </div>
+                <div class="card-top">
+                    <div class="card-content">
+                        <h3 class="title is-3">{{post.title|capfirst}}</h3>
+                        <div class="subtitle is-6 {{user|theme}}">
+                            <span class="icon"><i class="fa-solid fa-user"></i></span>
+                            <span>{{post.user|fullname}}</span>
+                            <span> | </span>
+                            <span>{{post.created|timesince}} ago</span>
+                        </div>
+                        <div class="text content">
+                            <p>{{post.body|truncatewords:10|safe}}</p>
+                        </div>
+                        <div>
+                            <a href="{{post.get_absolute_url}}" class="button {{user|theme}} card-item see-more">see more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% include 'partials/paginator.html' %}
+        </div>
+        <div class="column">
+            {% include 'partials/categories_box.html' %}
+            <br>
+            {% include 'partials/tags_box.html' %}
+        </div>
+    </div>
+    
+{% endblock content %}

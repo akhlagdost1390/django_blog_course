@@ -1,0 +1,19 @@
+<!-- pagination -->
+<nav class="pagination is-rounded" role="navigation" aria-label="pagination">
+
+    <a class="pagination-previous" {% if posts.has_previous %} href="/?page={{posts.previous_page_number}}" {% else %}disabled{% endif %}>Previous</a>
+
+    <a class="pagination-next" {% if posts.has_next %} href="/?page={{posts.next_page_number}}" {% else %}disabled{% endif %}>Next page</a>
+
+
+    <ul class="pagination-list">
+        {% for page in posts.paginator.page_range %}
+            <li>
+                <a href="/?page={{page}}" class="pagination-link {% if posts.number == page %}is-current{% endif %}" aria-label="Goto page 1">
+                    {{page}}
+                </a>
+            </li>
+        {% endfor %}
+        
+    </ul>
+</nav>

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load theme %}
+
+{% block header %}
+    <h1 class="title is-1">My Dashboard</h1>
+{% endblock header %}
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="{{message.extra_tags}}">{{message}}</div>
+        {% endfor %}
+    {% endif %}
+    <div class="columns">
+        <div class="column is-4">
+            <div class="panel {{user|theme}}">
+                <p class="panel-heading">Dashboard Settings</p>
+                <a href="{% url 'edit_info' %}" class="panel-block">Edit my info</a>
+                <a href="{% url 'password_change' %}" class="panel-block">Change password</a>
+                <a href="{% url 'password_reset' %}" class="panel-block">Reset Password</a>
+            </div>
+            <div>
+                <p class="title is-3">Change theme</p>
+                {% include 'partials/theme_box.html' %}
+            </div>
+        </div>
+        <div class="column">
+            <h2 class="title is-2">My Posts</h2>
+            <div class="mypost">
+                {% for post in posts %}
+                    {% include "partials/my_post_card.html" %}
+                {% empty %}
+                    <p>No Post Created Yet :(</p>
+                {% endfor %}
+            </div>
+            <h2 class="title is-2" style="margin-top: 5rem">Liked Post</h2>
+                {% for post in liked_post %}
+                    {% include "partials/my_post_card.html" %}
+                {% empty %}
+                    <p>You do not have any intersted post :(</p>
+                {% endfor %}
+        </div>
+        
+        
+        
+    </div>
+{% endblock content %}

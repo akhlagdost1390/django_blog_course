@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load theme %}
+
+{% block detail %}
+<div class="column is-6 head">
+    {% include 'partials/detail_content.html' %}
+    <hr>
+    <h3 class="title is-3">Comments</h3>
+    <form class="field" action="{% url 'comment:send' %}" method="post" id="commentForm">
+        {% csrf_token %}
+        <input type="hidden" name="post_id", value="{{post.id}}"/>
+        <div class="control block">
+            {{form}}
+        </div>
+        <div class="control block">
+            <input type="submit" class="button is-light" value="send">
+        </div>
+    </form>
+    <div class="comments" >
+        <ui id="comments">
+            {% for comment in comments %}
+                {% include 'partials/comment.html' %}
+            {% empty %}
+                No comment
+            {% endfor %}
+        </ui>
+    </div>
+</div>
+{% endblock detail %}
+
+{% block script %}
+<script>
+    $('document').ready(function(){
+        $('#likeForm').submit(function(event){
+            event.preventDefault()
+            var data = $(this).serialize()
+            var method = $(this).attr('method')
+            var url = $(this).data('url')
+            $.ajax({
+                method: method,
+                url: url,
+                data: data,
+                type: 'json',
+                success: function(response){
+                    var counter = $("#likes").text()
+                    var likeBtn = $("#likeBtn")
+                    if (response['action'] === 'like'){
+                        counter++;
+                        $("#likes").text(counter)
+                        likeBtn.css('color', 'red')
+                    }else if (response['action'] === 'dislike'){
+                        counter--;
+                        $("#likes").text(counter)
+                        likeBtn.css('color', 'black')
+                    }
+                },
+                error: function(response){
+                    if (response.status === 403){
+                        alert("You need to login")
+                    }
+                }
+            })
+        })
+    })
+</script>
+{% endblock script %}

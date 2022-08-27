@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1 class="title is-1">Categories</h1>
+{% endblock header %}
+
+{% block content %}
+    <ul class ="block">
+        {% for category in categories %}
+            <li class="block">
+                <a href="{% url 'post:category_posts' category.slug %}" class="is-large is-link">{{category.title}}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

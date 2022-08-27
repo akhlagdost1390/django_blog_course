@@ -1,0 +1,13 @@
+{% load full_name %}
+<li class="comment">
+    <div class="author">
+        {% if comment.user.profile.photo %}
+            <img src="comment.user.profile.photo.url" class="author-img" alt="{{comment.user|fullname}}">
+        {% else %}
+            <div style="font-size:35px; margin-right:30px"><span class="icon"><i class="fa-solid fa-user"></i></span> </div>
+        {% endif %}
+            <h4 class="title is-4">{{comment.user|fullname}}</h4>
+    </div>
+    <hr>
+    <p>{{comment.body|linebreaks}}</p>
+</li>

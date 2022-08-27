@@ -1,0 +1,14 @@
+
+    {% load theme %}
+    <div class="panel {{user|theme}}">
+        <p class="panel-heading">
+            Tags
+        </p>
+        
+        {% for tag in tags %}
+            <a href="#" class="button is-small is-rounded" style="margin:5px">
+                <p>{{tag.name}}</p>
+            </a>
+        {% endfor %}
+        
+    </div>

@@ -1,0 +1,13 @@
+{% load theme %}
+<div class="panel {{user|theme}}">
+    <p class="panel-heading ">
+        Categories
+    </p>
+    
+    {% for category in categories %}
+        <a href="{% url 'post:category_posts' category.slug %}" class="panel-block">
+            <p>{{category.title}}</p>
+        </a>
+    {% endfor %}
+    
+</div>
